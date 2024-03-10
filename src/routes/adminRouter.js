@@ -4,6 +4,8 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const app = express.Router();
 
+const { adminauth } = require("../middleware");
+
 //////////////////////////////////////////////////////////////////
 ////
 ////        REQUEST ROUTES
@@ -28,10 +30,10 @@ app.put("/teacher/:id", async () => {});
 app.delete("/teacher/:id", async () => {});
 
 //ISSUE or RETURN ROUTES
-app.post("/books/issue/:bookID", async () => {});
-app.post("/books/return/:bookID", async () => {});
+app.post("/books/issue/:id", async () => {});
+app.post("/books/return/:id", async () => {});
 
-//SAMPLE REPORTS -- get all issue books
+// get all issued books
 app.get("/books/issues", async () => {});
 
 //////////////////////////////////////////////////////////////////

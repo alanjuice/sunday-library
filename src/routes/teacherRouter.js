@@ -1,10 +1,10 @@
 const express = require("express");
 const pool = require("../database/pool");
-const teacherauth = require("../middleware/teacherauth");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const app = express.Router();
+const { teacherauth } = require("../middleware");
 
 //////////////////////////////////////////////////////////////////
 ////
@@ -14,7 +14,7 @@ const app = express.Router();
 
 app.post("/login", loginHandler);
 app.get("/books", teacherauth, () => {});
-app.post("/allocate", () => {});
+app.post("/allocate", teacherauth, allocateBooks);
 app.get("/students", teacherauth, getStudents);
 
 //////////////////////////////////////////////////////////////////
@@ -68,5 +68,7 @@ async function getStudents(req, res) {
     res.status(404).json({ status: false, msg: "s" });
   }
 }
+
+async function allocateBooks(req, res) {}
 
 module.exports = app;

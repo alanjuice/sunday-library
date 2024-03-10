@@ -2,11 +2,10 @@ const express = require("express");
 const dotenv = require("dotenv");
 dotenv.config();
 
-const logger = require("./middleware/logger");
+const { logger } = require("./middleware");
 const cors = require("cors");
 
-const adminRouter = require("./routes/adminRouter");
-const teacherRouter = require("./routes/teacherRouter");
+const { adminRouter, teacherRouter } = require("./routes");
 
 const app = express();
 
