@@ -1,36 +1,42 @@
 const pool = require("../../database/pool");
+const Joi = require("joi");
 
-//TODO: autogenerate bookid based on category
+const bookSchema = Joi.object({
+  id: Joi.string().required(),
+  name: Joi.string().required(),
+  author: Joi.string().required(),
+  price: Joi.number().required(),
+  publisher: Joi.string().required(),
+  category: Joi.string().required(),
+});
 
 async function addBook(req, res) {
   try {
+    const { error } = bookSchema.validate(req.body);
+    if (error) {
+      return res.status(400).json({ status: false, msg: error.message });
+    }
+
     const { id, name, author, price, publisher, category } = req.body;
 
-    // const id = req.body.id;
-    // const name = req.body.name;
-    // const author = req.body.author;
-    // const price = req.body.price;
-    // const publisher = req.body.publisher;
-
-    if (!id || !name || !author || !price || !publisher || !category) {
-      res.status(400).json({ status: false, msg: "missing fields" });
-      return;
+    // Check if book already exists
+    const exists = await pool.query("SELECT * FROM books WHERE id = $1", [id]);
+    if (exists.rowCount !== 0) {
+      return res
+        .status(400)
+        .json({ status: false, msg: "Book already exists" });
     }
 
-    //check if book already exists or not
-    const exists = await pool.query("select * from books where id=$1", [id]);
-    if (exists.rowCount != 0) {
-      res.status(400).json({ status: false, msg: "book already exists" });
-      return;
-    }
-
-    const result = await pool.query(
-      "INSERT INTO BOOKS VALUES($1,$2,$3,$4,$5,$6,$7)",
+    // Insert the book into the database
+    await pool.query(
+      "INSERT INTO books (id, name, author, price, publisher, category, available) VALUES ($1, $2, $3, $4, $5, $6, $7)",
       [id, name, author, price, publisher, category, true]
     );
-    res.status(200).json({ status: true, msg: "book added" });
-  } catch {
-    res.json({ status: false, msg: "Something went wrong" });
+
+    res.status(200).json({ status: true, msg: "Book added" });
+  } catch (error) {
+    console.error("Error adding book:", error);
+    res.status(500).json({ status: false, msg: "Something went wrong" });
   }
 }
 

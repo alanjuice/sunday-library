@@ -1,37 +1,53 @@
 const pool = require("../../database/pool");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const Joi = require("joi");
 
-//Login handler for teacher
+const teacherLoginSchema = Joi.object({
+  id: Joi.string().required(),
+  password: Joi.string().required(),
+});
+
+// Login handler for teacher
 async function loginHandler(req, res) {
-  const id = req.body.id;
-  const password = req.body.password;
   try {
-    const result = await pool.query("select * from teachers where id = $1", [
+    const { error } = teacherLoginSchema.validate(req.body);
+    if (error) {
+      return res
+        .status(400)
+        .json({ status: false, msg: error.details[0].message });
+    }
+
+    const id = req.body.id;
+    const password = req.body.password;
+
+    const result = await pool.query("SELECT * FROM teachers WHERE id = $1", [
       id,
     ]);
 
     if (result.rowCount == 0) {
-      res.status(404).json({ status: false, msg: "user doesn't exist" });
+      res.status(404).json({ status: false, msg: "User doesn't exist" });
       return;
     }
+
     const hashedPassword = result.rows[0].password;
     const passwordMatch = await bcrypt.compare(password, hashedPassword);
+
     if (passwordMatch) {
       const cls = result.rows[0].class;
 
-      //Sending back authtoken in the header
-      const key = jwt.sign({ type: "Teacher", id: id, class: cls }, "hello");
-      res.set("x-authtoken", key);
-      res.status(200).json({ status: true, msg: "user authenticated" });
-
+      // Generating JWT token
+      const token = jwt.sign({ type: "Teacher", id: id, class: cls }, "hello");
+      res.setHeader("x-authtoken", token);
+      res.status(200).json({ status: true, msg: "User authenticated" });
       return;
     } else {
-      res.status(404).json({ status: false, msg: "password invalid" });
+      res.status(404).json({ status: false, msg: "Invalid password" });
       return;
     }
   } catch (error) {
-    res.status(400).json({ status: false, msg: "error" });
+    console.error("Error in teacher login:", error);
+    res.status(500).json({ status: false, msg: "Something went wrong" });
   }
 }
 
