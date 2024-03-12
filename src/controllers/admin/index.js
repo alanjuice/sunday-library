@@ -1,6 +1,6 @@
 const addBook = require("./addBook");
 const addTeacher = require("./addTeacher");
-const getBookByID = require("./getBookByID");
+const getBooksByCat = require("./getBooksByCat");
 const getBooks = require("./getBooks");
 const getIssuedBooks = require("./getIssuedBooks");
 const loginHandler = require("./loginHandler");
@@ -11,7 +11,7 @@ const returnBooks = require("./returnBook");
 module.exports = {
   addBook,
   addTeacher,
-  getBookByID,
+  getBooksByCat,
   getBooks,
   getIssuedBooks,
   loginHandler,

@@ -5,7 +5,7 @@ const {
   addBook,
   addTeacher,
   loginHandler,
-  getBookByID,
+  getBooksByCat,
   getBooks,
   getIssuedBooks,
   searchBook,
@@ -20,7 +20,7 @@ app.post("/login", loginHandler);
 //BOOK ROUTES
 app.get("/books", getBooks);
 app.post("/books", addBook);
-app.get("/books/:id", getBookByID);
+app.get("/books/:category", getBooksByCat);
 app.put("/books/:id", async () => {});
 app.delete("/books/:id", async () => {});
 app.get("/books/search/:term", searchBook);
@@ -36,7 +36,7 @@ app.delete("/teachers/:id", async () => {});
 app.post("/books/issue/", issueBooks);
 app.post("/books/return/", returnBooks);
 
-// get all issued books
+// Get all issued books
 app.get("/book/issues", getIssuedBooks);
 
 module.exports = app;
