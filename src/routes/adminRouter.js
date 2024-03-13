@@ -11,6 +11,7 @@ const {
   searchBook,
   issueBooks,
   returnBooks,
+  getCategories,
 } = require("../controllers/admin");
 const { adminauth } = require("../middleware");
 
@@ -18,12 +19,20 @@ const { adminauth } = require("../middleware");
 app.post("/login", loginHandler);
 
 //BOOK ROUTES
+//BOOK ROUTES
+app.get("/books/categories", getCategories);
+app.get("/books/search/:term", searchBook);
+app.get("/books/:category", getBooksByCat);
+
 app.get("/books", getBooks);
 app.post("/books", addBook);
-app.get("/books/:category", getBooksByCat);
 app.put("/books/:id", async () => {});
 app.delete("/books/:id", async () => {});
-app.get("/books/search/:term", searchBook);
+
+app.get("/books", getBooks);
+app.post("/books", addBook);
+
+app.get("/books/categories", getCategories);
 
 //TEACHER ROUTES
 app.get("/teachers", async () => {});

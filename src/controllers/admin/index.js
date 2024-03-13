@@ -7,6 +7,7 @@ const loginHandler = require("./loginHandler");
 const searchBook = require("./searchBook");
 const issueBooks = require("./issueBooks");
 const returnBooks = require("./returnBook");
+const getCategories = require("./getCategories");
 
 module.exports = {
   addBook,
@@ -18,4 +19,5 @@ module.exports = {
   searchBook,
   issueBooks,
   returnBooks,
+  getCategories,
 };
