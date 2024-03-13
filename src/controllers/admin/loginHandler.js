@@ -6,13 +6,17 @@ async function loginHandler(req, res) {
   const password = req.body.password;
 
   try {
+    const secret = process.env.SECRET_KEY;
     const result = await pool.query(
       "select value from config where key = 'admin_pass'"
     );
     if (result.rows[0].value == password) {
-      const token = jwt.sign({
-        type: "Admin",
-      });
+      const token = jwt.sign(
+        {
+          type: "Admin",
+        },
+        secret
+      );
       res.setHeader("x-authtoken", token);
       res.status(200).json({
         status: true,
