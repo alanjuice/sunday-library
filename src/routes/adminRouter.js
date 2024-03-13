@@ -12,36 +12,33 @@ const {
   issueBooks,
   returnBooks,
   getCategories,
+  addStudent,
 } = require("../controllers/admin");
 const { adminauth } = require("../middleware");
 
-//LOGIN ROUTE
+// LOGIN ROUTE
 app.post("/login", loginHandler);
 
-//BOOK ROUTES
-//BOOK ROUTES
+// BOOK ROUTES
 app.get("/books/categories", getCategories);
 app.get("/books/search/:term", searchBook);
 app.get("/books/:category", getBooksByCat);
-
 app.get("/books", getBooks);
 app.post("/books", addBook);
 app.put("/books/:id", async () => {});
 app.delete("/books/:id", async () => {});
 
-app.get("/books", getBooks);
-app.post("/books", addBook);
-
-app.get("/books/categories", getCategories);
-
-//TEACHER ROUTES
+// TEACHER ROUTES
 app.get("/teachers", async () => {});
 app.post("/teachers", addTeacher);
 app.get("/teachers/:id", async () => {});
 app.put("/teachers/:id", async () => {});
 app.delete("/teachers/:id", async () => {});
 
-//ISSUE or RETURN ROUTES
+//Student ROutes
+app.post("/students", addStudent);
+
+// ISSUE or RETURN ROUTES
 app.post("/books/issue/", issueBooks);
 app.post("/books/return/", returnBooks);
 

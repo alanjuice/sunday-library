@@ -8,7 +8,10 @@ async function allocateBooks(req, res) {
     const promises = allocateDetails.map(async (allocateDetail) => {
       const sid = allocateDetail.sid;
       const bid = allocateDetail.bid;
-      await pool.query("UPDATE ISSUES SET SID=$1 WHERE BID=$2", [sid, bid]);
+      await pool.query(
+        "UPDATE ISSUES SET SID=$1 WHERE BID=$2 and return_date is NULL",
+        [sid, bid]
+      );
     });
     await Promise.all(promises);
     res.status(200).json({ message: "Books allocated successfully" });

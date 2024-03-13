@@ -8,6 +8,7 @@ const searchBook = require("./searchBook");
 const issueBooks = require("./issueBooks");
 const returnBooks = require("./returnBook");
 const getCategories = require("./getCategories");
+const addStudent = require("./addStudent");
 
 module.exports = {
   addBook,
@@ -20,4 +21,5 @@ module.exports = {
   issueBooks,
   returnBooks,
   getCategories,
+  addStudent,
 };
