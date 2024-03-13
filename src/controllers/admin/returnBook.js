@@ -5,7 +5,7 @@ const pool = require("../../database/pool");
 async function returnBook(req, res) {
   try {
     const { bookId } = req.body;
-
+    console.log(bookId);
     const result = await pool.query(
       "UPDATE issues SET return_date = 'dd' WHERE bid = $1 AND return_date IS NULL",
       [bookId]
