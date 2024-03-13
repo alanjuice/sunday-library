@@ -3,11 +3,12 @@ const pool = require("../../database/pool");
 //gets all students of the teachers class
 async function getStudents(req, res) {
   try {
-    const cls = req.user.class;
+    const cls = req.user.classname;
     console.log(cls);
-    const result = await pool.query("select * from students where class = $1", [
-      cls,
-    ]);
+    const result = await pool.query(
+      "select * from students where classname = $1",
+      [cls]
+    );
     console.log(result);
     res.status(200).json(result.rows);
   } catch (error) {

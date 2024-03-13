@@ -34,10 +34,13 @@ async function loginHandler(req, res) {
     const passwordMatch = await bcrypt.compare(password, hashedPassword);
 
     if (passwordMatch) {
-      const cls = result.rows[0].class;
-
+      const cls = result.rows[0].classname;
       // Generating JWT token
-      const token = jwt.sign({ type: "Teacher", id: id, class: cls }, "hello");
+      const token = jwt.sign(
+        { type: "Teacher", id: id, classname: cls },
+        "hello"
+      );
+      console.log(token);
       res.setHeader("x-authtoken", token);
       res.status(200).json({ status: true, msg: "User authenticated" });
       return;
