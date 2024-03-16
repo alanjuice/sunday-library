@@ -32,7 +32,7 @@ async function addBook(req, res) {
       "INSERT INTO books (id, name, author, price, publisher, category, available) VALUES ($1, $2, $3, $4, $5, $6, $7)",
       [id, name, author, price, publisher, category, true]
     );
-
+    console.log("Book added " + id);
     res.status(200).json({ status: true, msg: "Book added" });
   } catch (error) {
     console.error("Error adding book:", error);

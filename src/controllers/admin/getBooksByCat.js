@@ -1,6 +1,6 @@
 const pool = require("../../database/pool");
 
-//Get a specific book id from specifying in req params
+//Get books of the specified category
 async function getBooksByCat(req, res) {
   try {
     const category = req.params.category;

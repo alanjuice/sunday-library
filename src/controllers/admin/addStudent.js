@@ -30,7 +30,7 @@ async function addStudent(req, res) {
       name,
       classname,
     ]);
-
+    console.log("Student added " + id);
     res.status(200).json({ status: true, msg: "student added" });
   } catch (error) {
     console.error("Error adding student:", error);

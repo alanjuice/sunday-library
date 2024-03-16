@@ -42,7 +42,7 @@ async function addTeacher(req, res) {
       "INSERT INTO teachers (id, name, mno, classname, password) VALUES ($1, $2, $3, $4, $5)",
       [id, name, mno, classname, encryptedPassword]
     );
-
+    console.log("Teacher added " + id);
     res.status(200).json({ status: true, msg: "Teacher added" });
   } catch (error) {
     console.error("Error adding teacher:", error);
