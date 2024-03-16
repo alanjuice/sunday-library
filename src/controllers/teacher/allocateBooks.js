@@ -14,7 +14,9 @@ async function allocateBooks(req, res) {
       );
     });
     await Promise.all(promises);
-    res.status(200).json({ message: "Books allocated successfully" });
+    res
+      .status(200)
+      .json({ status: true, message: "Books allocated successfully" });
   } catch (error) {
     console.error("Error allocating books:", error);
     res.status(500).json({ error: "Internal Server Error" });
