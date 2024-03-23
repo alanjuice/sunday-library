@@ -1,8 +1,8 @@
 const pool = require("../../database/pool");
 
-//Delete a single book, requires book id
+//Gets a single book, requires book id
 
-async function deleteBook(req, res) {
+async function getBookIdId(req, res) {
   try {
     const { bookId } = req.body;
 
@@ -15,13 +15,11 @@ async function deleteBook(req, res) {
       return;
     }
 
-    await pool.query("delete * from books where id=$1", [bookId]);
-
-    res.status(200).json({ status: true, msg: "Book deleted successfully" });
+    res.status(200).json({ status: true, data: bookExists.rows[0] });
   } catch (error) {
-    console.error("Error deleting book:", error);
+    console.log("Error", error);
     res.status(500).json({ status: false, msg: "Internal server error" });
   }
 }
 
-module.exports = deleteBook;
+module.exports = getBookIdId;
