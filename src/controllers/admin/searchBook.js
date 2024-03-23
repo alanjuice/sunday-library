@@ -9,7 +9,7 @@ async function searchBook(req, res) {
 
     const result = await pool.query(queryText, [`%${term}%`]);
 
-    res.status(200).json(result.rows);
+    res.status(200).json({ status: true, data: result.rows });
   } catch (error) {
     console.error("Error searching for books:", error);
     res.status(500).json({ status: false, msg: "Something went wrong" });

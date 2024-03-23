@@ -9,8 +9,10 @@ async function getBooksByCat(req, res) {
     ]);
     if (result.rows) {
       res.json({ status: true, data: result.rows });
-    } else res.status(404).json({ status: false, msg: "book doesn't exists" });
+    } else
+      res.status(404).json({ status: false, msg: "category doesn't exists" });
   } catch (error) {
+    console.log("Error", error);
     res.status(404).json({ status: false, msg: "Something went wrong" });
   }
 }

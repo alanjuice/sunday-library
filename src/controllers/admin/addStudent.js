@@ -1,10 +1,11 @@
 const pool = require("../../database/pool");
 const Joi = require("joi");
 
+//Student model
 const studentSchema = Joi.object({
   id: Joi.string().required(),
-  name: Joi.string().required(),
-  classname: Joi.string().required(),
+  name: Joi.string().required().max(64),
+  classname: Joi.string().required().max(3),
 });
 
 async function addStudent(req, res) {

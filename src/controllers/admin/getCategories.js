@@ -7,7 +7,7 @@ async function getCategories(req, res) {
     const categoryNames = result.rows.map(
       (categoryObj) => categoryObj.category
     );
-    res.status(200).json(categoryNames);
+    res.status(200).json({ status: true, data: categoryNames });
   } catch (error) {
     res.status(404).json({ status: false, msg: "Something went wrong" });
   }

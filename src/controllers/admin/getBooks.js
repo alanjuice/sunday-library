@@ -4,8 +4,9 @@ const pool = require("../../database/pool");
 async function getBooks(req, res) {
   try {
     const result = await pool.query("select * from books");
-    res.status(200).json(result.rows);
+    res.status(200).json({ status: true, data: result.rows });
   } catch (error) {
+    console.log("Error", error);
     res.status(404).json({ status: false, msg: "Something went wrong" });
   }
 }

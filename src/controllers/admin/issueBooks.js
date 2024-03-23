@@ -2,7 +2,7 @@ const pool = require("../../database/pool");
 
 //Issue multiple books to a teacher, requires teacher id and list of books to issue
 async function issueBooks(req, res) {
-  const { books, teacherId } = req.body
+  const { books, teacherId } = req.body;
   try {
     await Promise.all(
       books.map(async (book) => {
