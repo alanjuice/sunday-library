@@ -35,9 +35,10 @@ async function loginHandler(req, res) {
 
     if (passwordMatch) {
       const cls = result.rows[0].classname;
+      const name = result.rows[0].name;
       // Generating JWT token
       const token = jwt.sign(
-        { type: "Teacher", id: id, classname: cls },
+        { type: "Teacher", id: id, classname: cls, name: name },
         "hello"
       );
       console.log(token);
