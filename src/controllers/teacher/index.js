@@ -3,6 +3,7 @@ const loginHandler = require("./loginHandler");
 const allocateBooks = require("./allocateBooks");
 const deallocateBook = require("./deallocateBook");
 const getTeacherBooks = require("./getTeacherBooks");
+const getDetails = require("./getDetails");
 
 module.exports = {
   getStudents,
@@ -10,4 +11,5 @@ module.exports = {
   allocateBooks,
   deallocateBook,
   getTeacherBooks,
+  getDetails,
 };

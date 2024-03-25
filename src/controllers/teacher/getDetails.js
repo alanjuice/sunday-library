@@ -7,12 +7,12 @@ async function getDetails(req, res) {
       "select name,classname,mno from teachers where id = $1",
       [req.user.id]
     );
-    console.log(result);
-    res.status(200).json(result.rows);
+    console.log(result.rows);
+    res.status(200).json(result.rows[0]);
   } catch (error) {
     console.log("Error", error);
     res.status(404).json({ status: false, msg: "Internal Server Error" });
   }
 }
 
-module.exports = getStudents;
+module.exports = getDetails;
