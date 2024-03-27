@@ -4,7 +4,7 @@ async function viewAllocation(req, res) {
   try {
     const teacherId = req.user.id;
     const results = await pool.query(
-      "select sid,bid from issues where return_date is null and tid=$1",
+      "SELECT s.NAME AS student_name, b.NAME AS book_name FROM ISSUES i JOIN STUDENTS s ON i.SID = s.ID JOIN BOOKS b ON i.BID = b.ID WHERE i.RETURN_DATE IS NULL AND i.TID = $1;",
       [teacherId]
     );
 
