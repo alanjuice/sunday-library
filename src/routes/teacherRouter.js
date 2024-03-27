@@ -8,6 +8,7 @@ const {
   deallocateBook,
   getTeacherBooks,
   getDetails,
+  viewAllocation,
 } = require("../controllers/teacher");
 
 const { teacherauth } = require("../middleware");
@@ -18,5 +19,6 @@ app.post("/allocate", teacherauth, allocateBooks);
 app.post("/deallocate", teacherauth, deallocateBook);
 app.get("/students", teacherauth, getStudents);
 app.get("/details", teacherauth, getDetails);
+app.get("/viewallocation", teacherauth, viewAllocation);
 
 module.exports = app;
