@@ -9,6 +9,10 @@ const issueBooks = require("./issueBooks");
 const returnBooks = require("./returnBook");
 const getCategories = require("./getCategories");
 const addStudent = require("./addStudent");
+const addCategory = require("./addCategory");
+const getLog = require("./getLog");
+const deleteBook = require("./deleteBook");
+const deleteTeacher = require("./deleteTeacher");
 
 module.exports = {
   addBook,
@@ -22,4 +26,8 @@ module.exports = {
   returnBooks,
   getCategories,
   addStudent,
+  getLog,
+  addCategory,
+  deleteBook,
+  deleteTeacher,
 };

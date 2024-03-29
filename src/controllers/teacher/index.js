@@ -5,6 +5,7 @@ const deallocateBook = require("./deallocateBook");
 const getTeacherBooks = require("./getTeacherBooks");
 const getDetails = require("./getDetails");
 const viewAllocation = require("./viewAllocation");
+const getFreeBooks = require("./getFreeBooks");
 
 module.exports = {
   getStudents,
@@ -14,4 +15,5 @@ module.exports = {
   getTeacherBooks,
   getDetails,
   viewAllocation,
+  getFreeBooks,
 };

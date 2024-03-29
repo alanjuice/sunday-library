@@ -7,7 +7,7 @@ const bcrypt = require("bcrypt");
 const teacherSchema = Joi.object({
   id: Joi.string().required(),
   name: Joi.string().required().max(64),
-  mno: Joi.number().max(10).required(),
+  mno: Joi.number().required(),
   classname: Joi.string().required().max(3),
   password: Joi.string().required(),
 });

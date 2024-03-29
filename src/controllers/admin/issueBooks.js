@@ -7,7 +7,7 @@ async function issueBooks(req, res) {
     await Promise.all(
       books.map(async (book) => {
         await pool.query(
-          "INSERT INTO issues (tid, bid, borrow_date) VALUES ($1, $2, 's')",
+          "INSERT INTO issues (tid, bid, borrow_date) VALUES ($1, $2, $3, 'NOW()')",
           [teacherId, book]
         );
       })
