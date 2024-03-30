@@ -3,12 +3,16 @@ const pool = require("../../database/pool");
 async function getLog(req, res) {
   const { year } = req.params;
   try {
-    //not working i guess
-
+    const parsedYear = parseInt(year); // Convert year to a number
     const result = await pool.query(
-      "SELECT * FROM log WHERE issue_date BETWEEN $1 AND $2",
-      [`${year}-01-01`, `${year + 1}-01-01`]
+      "SELECT class, ARRAY_AGG(book_id) AS books " +
+        "FROM log " +
+        "WHERE issue_date BETWEEN $1 AND $2 " +
+        "GROUP BY class " +
+        "ORDER BY class",
+      [`${parsedYear}-01-01`, `${parsedYear + 1}-01-01`]
     );
+
     res.status(200).json({ status: true, data: result.rows });
   } catch (error) {
     console.log("Error", error);

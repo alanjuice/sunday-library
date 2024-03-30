@@ -19,6 +19,10 @@ const {
   getLog,
   addExistingBook,
   getBookByID,
+  editStudent,
+  editTeacher,
+  getStudents,
+  getTeachers,
 } = require("../controllers/admin");
 const { adminauth } = require("../middleware");
 const updateBook = require("../controllers/admin/editBook");
@@ -39,14 +43,15 @@ app.patch("/books/:id", updateBook);
 app.delete("/books/", deleteBook);
 
 // TEACHER ROUTES
-app.get("/teachers", async () => {});
+app.get("/teachers", getTeachers);
 app.post("/teachers", addTeacher);
-app.get("/teachers/:id", async () => {});
-app.put("/teachers/:id", async () => {});
+app.patch("/teachers/:id", editTeacher);
 app.delete("/teachers/", deleteTeacher);
 
 //Student ROutes
+app.get("/students", getStudents);
 app.post("/students", addStudent);
+app.patch("/students", editStudent);
 
 // ISSUE or RETURN ROUTES
 app.post("/books/issue/", issueBooks);
