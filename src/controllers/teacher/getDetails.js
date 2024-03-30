@@ -4,7 +4,7 @@ const pool = require("../../database/pool");
 async function getDetails(req, res) {
   try {
     const result = await pool.query(
-      "select name,classname,mno from teachers where id = $1",
+      "select name,classname,email from teachers where id = $1",
       [req.user.id]
     );
     console.log(result.rows);
