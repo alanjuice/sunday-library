@@ -16,6 +16,8 @@ const {
   deleteBook,
   deleteTeacher,
   addCategory,
+  getLog,
+  addExistingBook,
 } = require("../controllers/admin");
 const { adminauth } = require("../middleware");
 
@@ -28,6 +30,7 @@ app.get("/books/categories", getCategories);
 app.get("/books/search/:term", searchBook);
 app.get("/books/:category", getBooksByCat);
 app.get("/books", getBooks);
+app.post("/books/:id", addExistingBook);
 app.post("/books", addBook);
 app.put("/books/:id", async () => {});
 app.delete("/books/", deleteBook);
@@ -48,5 +51,7 @@ app.post("/books/return/", returnBooks);
 
 // Get all issued books
 app.get("/book/issues", getIssuedBooks);
+
+app.get("/log/:year", getLog);
 
 module.exports = app;

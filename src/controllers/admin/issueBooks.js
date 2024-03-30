@@ -2,14 +2,20 @@ const pool = require("../../database/pool");
 
 //Issue multiple books to a teacher, requires teacher id and list of books to issue
 async function issueBooks(req, res) {
-  const { books, teacherId } = req.body;
+  const { books, teacherId, classname } = req.body;
   try {
     await Promise.all(
       books.map(async (book) => {
+        //Insert into issue table
         await pool.query(
-          "INSERT INTO issues (tid, bid, borrow_date) VALUES ($1, $2, $3, 'NOW()')",
+          "INSERT INTO issues (tid, bid, borrow_date) VALUES ($1, $2, 'NOW()')",
           [teacherId, book]
         );
+        //Insert the issue into logs
+        await pool.query("INSERT INTO LOG VALUES ($1,'NOW()',$2)", [
+          classname,
+          book,
+        ]);
       })
     );
 

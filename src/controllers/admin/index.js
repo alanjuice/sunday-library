@@ -13,6 +13,7 @@ const addCategory = require("./addCategory");
 const getLog = require("./getLog");
 const deleteBook = require("./deleteBook");
 const deleteTeacher = require("./deleteTeacher");
+const addExistingBook = require("./addExistingBook");
 
 module.exports = {
   addBook,
@@ -30,4 +31,5 @@ module.exports = {
   addCategory,
   deleteBook,
   deleteTeacher,
+  addExistingBook,
 };

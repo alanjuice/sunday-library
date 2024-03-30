@@ -1,10 +1,13 @@
 const pool = require("../../database/pool");
 
 async function getLog(req, res) {
-  const { year, classname } = req.body;
+  const { year } = req.params;
   try {
+    //not working i guess
+
     const result = await pool.query(
-      "select * from issues where classname=$1 and $1 between return_date and issue_date"
+      "SELECT * FROM log WHERE issue_date BETWEEN $1 AND $2",
+      [`${year}-01-01`, `${year + 1}-01-01`]
     );
     res.status(200).json({ status: true, data: result.rows });
   } catch (error) {
