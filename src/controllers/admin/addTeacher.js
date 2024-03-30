@@ -7,7 +7,7 @@ const bcrypt = require("bcrypt");
 const teacherSchema = Joi.object({
   id: Joi.string().required(),
   name: Joi.string().required().max(64),
-  mno: Joi.number().required(),
+  email: Joi.required(),
   classname: Joi.string().required().max(3),
   password: Joi.string().required(),
 });
@@ -19,7 +19,7 @@ async function addTeacher(req, res) {
       return res.status(400).json({ status: false, msg: error.message });
     }
 
-    const { id, name, mno, classname, password } = req.body;
+    const { id, name, email, classname, password } = req.body;
 
     // Check if teacher already exists
     const exists = await pool.query("SELECT * FROM teachers WHERE id = $1", [
@@ -38,8 +38,8 @@ async function addTeacher(req, res) {
 
     // Insert the teacher into the database
     await pool.query(
-      "INSERT INTO teachers (id, name, mno, classname, password) VALUES ($1, $2, $3, $4, $5)",
-      [id, name, mno, classname, encryptedPassword]
+      "INSERT INTO teachers (id, name, email, classname, password) VALUES ($1, $2, $3, $4, $5)",
+      [id, name, email, classname, encryptedPassword]
     );
     console.log("Teacher added " + id);
     res.status(200).json({ status: true, msg: "Teacher added" });
