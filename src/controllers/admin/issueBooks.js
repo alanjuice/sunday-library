@@ -11,6 +11,10 @@ async function issueBooks(req, res) {
           "INSERT INTO issues (tid, bid, borrow_date) VALUES ($1, $2, 'NOW()')",
           [teacherId, book]
         );
+        await pool.query(
+          "update table books set available=false where id=$1",
+          [book]
+        );
         //Insert the issue into logs
         await pool.query("INSERT INTO LOG VALUES ($1,'NOW()',$2)", [
           classname,
