@@ -4,14 +4,14 @@ const pool = require("../../database/pool");
 
 async function getBookIdId(req, res) {
   try {
-    const { bookId } = req.body;
+    const { id } = req.params;
 
     const bookExists = await pool.query("select * from books where id=$1", [
-      bookId,
+      id,
     ]);
-
+    console.log(bookExists.rows);
     if (bookExists.rowCount == 0) {
-      res.stataus(400).json({ status: false, msg: "Book doesn't exist" });
+      res.status(400).json({ status: false, msg: "Book doesn't exist" });
       return;
     }
 
