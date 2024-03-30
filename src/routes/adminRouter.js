@@ -18,8 +18,10 @@ const {
   addCategory,
   getLog,
   addExistingBook,
+  getBookByID,
 } = require("../controllers/admin");
 const { adminauth } = require("../middleware");
+const updateBook = require("../controllers/admin/editBook");
 
 // LOGIN ROUTE
 app.post("/login", loginHandler);
@@ -28,11 +30,12 @@ app.post("/login", loginHandler);
 app.post("/books/category", addCategory);
 app.get("/books/categories", getCategories);
 app.get("/books/search/:term", searchBook);
-app.get("/books/:category", getBooksByCat);
+app.get("/books/:id", getBookByID);
 app.get("/books", getBooks);
+
 app.post("/books/:id", addExistingBook);
 app.post("/books", addBook);
-app.put("/books/:id", async () => {});
+app.patch("/books/:id", updateBook);
 app.delete("/books/", deleteBook);
 
 // TEACHER ROUTES

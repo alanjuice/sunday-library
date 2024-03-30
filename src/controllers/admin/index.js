@@ -14,6 +14,8 @@ const getLog = require("./getLog");
 const deleteBook = require("./deleteBook");
 const deleteTeacher = require("./deleteTeacher");
 const addExistingBook = require("./addExistingBook");
+const editBook = require("./editBook");
+const getBookByID = require("./getBookByID");
 
 module.exports = {
   addBook,
@@ -32,4 +34,6 @@ module.exports = {
   deleteBook,
   deleteTeacher,
   addExistingBook,
+  editBook,
+  getBookByID,
 };
