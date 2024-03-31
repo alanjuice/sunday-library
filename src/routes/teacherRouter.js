@@ -10,6 +10,7 @@ const {
   getDetails,
   viewAllocation,
   getFreeBooks,
+  getAllocatedBooks,
 } = require("../controllers/teacher");
 
 const { teacherauth } = require("../middleware");
@@ -22,5 +23,6 @@ app.get("/students", teacherauth, getStudents);
 app.get("/details", teacherauth, getDetails);
 app.get("/viewallocation", teacherauth, viewAllocation);
 app.get("/freebooks", teacherauth, getFreeBooks);
+app.get("/allocatedbooks", teacherauth, getAllocatedBooks);
 
 module.exports = app;
