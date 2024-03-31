@@ -10,7 +10,7 @@ async function getAllocatedBooks(req, res) {
 
     const books = results.rows;
 
-    res.status(200).json(books);
+    res.status(200).json({ status: true, data: books });
   } catch (error) {
     console.error("Error fetching books:", error);
     res.status(500).json({ error: "Internal Server Error" });
