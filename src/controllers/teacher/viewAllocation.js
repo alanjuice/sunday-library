@@ -4,7 +4,7 @@ async function viewAllocation(req, res) {
   try {
     const teacherId = req.user.id;
     const results = await pool.query(
-      "SELECT s.NAME AS student_name, b.NAME AS book_name FROM ISSUES i JOIN STUDENTS s ON i.SID = s.ID JOIN BOOKS b ON i.BID = b.ID WHERE i.RETURN_DATE IS NULL AND i.TID = $1;",
+      "SELECT s.NAME AS student_name, b.ID AS book_id, b.NAME AS book_name FROM ISSUES i JOIN STUDENTS s ON i.SID = s.ID JOIN BOOKS b ON i.BID = b.ID WHERE i.RETURN_DATE IS NULL AND i.TID = $1;",
       [teacherId]
     );
 
@@ -12,11 +12,11 @@ async function viewAllocation(req, res) {
 
     // Restructure data by grouping books under each student
     results.rows.forEach((row) => {
-      const { student_name, book_name } = row;
+      const { student_name, book_id, book_name } = row;
       if (!allocations[student_name]) {
         allocations[student_name] = { student_name, books: [] };
       }
-      allocations[student_name].books.push({ book_name });
+      allocations[student_name].books.push({ book_id, book_name });
     });
 
     // Convert allocations object to array
