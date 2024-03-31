@@ -4,9 +4,10 @@ const pool = require("../../database/pool");
 async function getBooksByCat(req, res) {
   try {
     const category = req.params.category;
-    const result = await pool.query("select * from books where CATEGORY=$1", [
-      category,
-    ]);
+    const result = await pool.query(
+      "select * from books where CATEGORY=$1 and status=true",
+      [category]
+    );
     if (result.rows) {
       res.json({ status: true, data: result.rows });
     } else

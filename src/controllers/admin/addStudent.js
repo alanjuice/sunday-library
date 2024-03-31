@@ -26,10 +26,11 @@ async function addStudent(req, res) {
     }
 
     // Insert the student into the database
-    await pool.query("INSERT INTO students  VALUES ($1, $2, $3)", [
+    await pool.query("INSERT INTO students  VALUES ($1, $2, $3,$4)", [
       id,
       name,
       classname,
+      true,
     ]);
     console.log("Student added " + id);
     res.status(200).json({ status: true, msg: "student added" });

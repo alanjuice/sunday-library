@@ -28,7 +28,7 @@ async function addExistingBook(req, res) {
 
     // Insert the new book with the modified ID
     await pool.query(
-      "INSERT INTO books (id, name, author, price, publisher, cat_id, available) VALUES ($1, $2, $3, $4, $5, $6, $7)",
+      "INSERT INTO books (id, name, author, price, publisher, cat_id, available,status) VALUES ($1, $2, $3, $4, $5, $6, $7,$8)",
       [
         newId,
         oldBookDetails.name,
@@ -36,6 +36,7 @@ async function addExistingBook(req, res) {
         oldBookDetails.price,
         oldBookDetails.publisher,
         oldBookDetails.cat_id,
+        true,
         true,
       ]
     );

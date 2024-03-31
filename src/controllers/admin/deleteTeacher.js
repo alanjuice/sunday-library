@@ -17,7 +17,9 @@ async function deleteTeacher(req, res) {
       return;
     }
 
-    await pool.query("delete * from teachers where id=$1", [teacherId]);
+    await pool.query("update teachers set status=false where id=$1", [
+      teacherId,
+    ]);
 
     res.status(200).json({ status: true, msg: "Teacher deleted successfully" });
   } catch (error) {

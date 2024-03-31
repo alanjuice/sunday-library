@@ -28,8 +28,8 @@ async function addBook(req, res) {
 
     const newId = category + ("000" + num).slice(-3);
     await pool.query(
-      "INSERT INTO books (id, name, author, price, publisher, cat_id, available) VALUES ($1, $2, $3, $4, $5, $6, $7)",
-      [newId, name, author, price, publisher, category, true]
+      "INSERT INTO books (id, name, author, price, publisher, cat_id, available,status) VALUES ($1, $2, $3, $4, $5, $6, $7)",
+      [newId, name, author, price, publisher, category, true, true]
     );
     console.log("Book added " + newId);
     await pool.query("update BOOK_CAT set unique_count = unique_count+1");

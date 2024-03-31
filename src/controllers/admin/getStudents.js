@@ -2,7 +2,7 @@ const pool = require("../../database/pool");
 
 async function getStudents(req, res) {
   try {
-    const result = await pool.query("select * from students");
+    const result = await pool.query("select * from students where status=true");
     res.status(200).json({ status: true, data: result.rows });
   } catch (error) {
     console.log("Error", error);

@@ -38,8 +38,8 @@ async function addTeacher(req, res) {
 
     // Insert the teacher into the database
     await pool.query(
-      "INSERT INTO teachers (id, name, email, classname, password) VALUES ($1, $2, $3, $4, $5)",
-      [id, name, email, classname, encryptedPassword]
+      "INSERT INTO teachers (id, name, email, classname, password,status) VALUES ($1, $2, $3, $4, $5,$6)",
+      [id, name, email, classname, encryptedPassword, true]
     );
     console.log("Teacher added " + id);
     res.status(200).json({ status: true, msg: "Teacher added" });
