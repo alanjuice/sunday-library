@@ -4,10 +4,10 @@ const pool = require("../../database/pool");
 
 async function deleteBook(req, res) {
   try {
-    const { bookId } = req.body;
+    const { id } = req.params;
 
     const bookExists = await pool.query("select * from books where id=$1", [
-      bookId,
+      id,
     ]);
 
     if (bookExists.rowCount == 0) {
@@ -15,7 +15,7 @@ async function deleteBook(req, res) {
       return;
     }
 
-    await pool.query("delete * from books where id=$1", [bookId]);
+    await pool.query("delete * from books where id=$1", [id]);
 
     res.status(200).json({ status: true, msg: "Book deleted successfully" });
   } catch (error) {
