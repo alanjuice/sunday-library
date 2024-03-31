@@ -20,6 +20,7 @@ const editStudent = require("./editStudent");
 const editTeacher = require("./editTeacher");
 const getTeachers = require("./getTeachers");
 const getStudents = require("./getStudents");
+const deleteStudent = require("./deleteStudent");
 
 module.exports = {
   addBook,
@@ -44,4 +45,5 @@ module.exports = {
   editTeacher,
   getTeachers,
   getStudents,
+  deleteStudent,
 };

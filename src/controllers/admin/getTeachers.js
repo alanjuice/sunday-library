@@ -3,7 +3,7 @@ const pool = require("../../database/pool");
 async function getTeachers(req, res) {
   try {
     const result = await pool.query(
-      "select name,email,class from teachers where status=true"
+      "select name,email,classname from teachers where status=true"
     );
     res.status(200).json({ status: true, data: result.rows });
   } catch (error) {

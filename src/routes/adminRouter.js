@@ -23,6 +23,7 @@ const {
   editTeacher,
   getStudents,
   getTeachers,
+  deleteStudent
 } = require("../controllers/admin");
 const { adminauth } = require("../middleware");
 const updateBook = require("../controllers/admin/editBook");
@@ -40,6 +41,7 @@ app.delete("/teachers/", deleteTeacher);
 app.get("/students", getStudents);
 app.post("/students", addStudent);
 app.patch("/students", editStudent);
+app.delete("/students/", deleteStudent );
 
 // BOOK ROUTES
 // ISSUE or RETURN ROUTES
