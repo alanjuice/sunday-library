@@ -8,12 +8,24 @@ async function viewAllocation(req, res) {
       [teacherId]
     );
 
-    const books = results.rows;
+    const allocations = {}; // Object to store allocations by student
 
-    res.status(200).json({ status: true, data: books });
+    // Restructure data by grouping books under each student
+    results.rows.forEach((row) => {
+      const { student_name, book_name } = row;
+      if (!allocations[student_name]) {
+        allocations[student_name] = { student_name, books: [] };
+      }
+      allocations[student_name].books.push({ book_name });
+    });
+
+    // Convert allocations object to array
+    const responseData = Object.values(allocations);
+
+    res.status(200).json({ status: true, data: responseData });
   } catch (error) {
     console.error("Error fetching teacher's books:", error);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ status: false, error: "Internal Server Error" });
   }
 }
 
