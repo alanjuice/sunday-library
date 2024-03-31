@@ -28,7 +28,7 @@ async function addBook(req, res) {
 
     const newId = category + ("000" + num).slice(-3);
     await pool.query(
-      "INSERT INTO books (id, name, author, price, publisher, cat_id, available,status) VALUES ($1, $2, $3, $4, $5, $6, $7)",
+      "INSERT INTO books (id, name, author, price, publisher, cat_id, available,status) VALUES ($1, $2, $3, $4, $5, $6, $7,$8)",
       [newId, name, author, price, publisher, category, true, true]
     );
     console.log("Book added " + newId);

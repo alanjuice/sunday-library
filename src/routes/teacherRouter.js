@@ -21,6 +21,6 @@ app.post("/deallocate", teacherauth, deallocateBook);
 app.get("/students", teacherauth, getStudents);
 app.get("/details", teacherauth, getDetails);
 app.get("/viewallocation", teacherauth, viewAllocation);
-app.get("/freebooks", getFreeBooks);
+app.get("/freebooks", teacherauth, getFreeBooks);
 
 module.exports = app;

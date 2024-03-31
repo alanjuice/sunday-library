@@ -7,11 +7,14 @@ async function returnBook(req, res) {
     const { bookId } = req.body;
     console.log(bookId);
     const result = await pool.query(
-      "UPDATE issues SET return_date = 'NOW()' and available=true WHERE bid = $1 AND return_date IS NULL",
+      "UPDATE issues SET return_date = NOW() WHERE bid = $1 AND return_date IS NULL",
       [bookId]
     );
 
     if (result.rowCount > 0) {
+      await pool.query("UPDATE books SET available=true WHERE id = $1", [
+        bookId,
+      ]);
       res.json({ status: true, msg: "Book returned successfully" });
     } else {
       res.json({ status: false, msg: "Book not found or already returned" });
