@@ -5,11 +5,10 @@ async function updateStudent(req, res) {
     const { id } = req.params;
     const { name, classname } = req.body;
 
-    await pool.query("UPDATE STUDENT SET name = $2, class = $3 WHERE id = $1", [
-      id,
-      name,
-      classname,
-    ]);
+    await pool.query(
+      "UPDATE STUDENTS SET name = $2, classname = $3 WHERE id = $1",
+      [id, name, classname]
+    );
     console.log("Student updated " + id);
     res.status(200).json({ status: true, msg: "Student updated" });
   } catch (error) {
