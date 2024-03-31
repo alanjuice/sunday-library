@@ -4,7 +4,7 @@ const pool = require("../../database/pool");
 async function getIssuedBooks(req, res) {
   try {
     const result = await pool.query(
-      "select * from issues where return_date is null"
+      "select sid,tid,bid from issues where return_date is null"
     );
     res.status(200).json({ status: true, data: result.rows });
   } catch (error) {

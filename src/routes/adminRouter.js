@@ -5,7 +5,6 @@ const {
   addBook,
   addTeacher,
   loginHandler,
-  getBooksByCat,
   getBooks,
   getIssuedBooks,
   searchBook,
@@ -23,8 +22,9 @@ const {
   editTeacher,
   getStudents,
   getTeachers,
-  deleteStudent
+  deleteStudent,
 } = require("../controllers/admin");
+
 const { adminauth } = require("../middleware");
 const updateBook = require("../controllers/admin/editBook");
 
@@ -35,13 +35,13 @@ app.post("/login", loginHandler);
 app.get("/teachers", getTeachers);
 app.post("/teachers", addTeacher);
 app.patch("/teachers/:id", editTeacher);
-app.delete("/teachers/", deleteTeacher);
+app.delete("/teachers/:id", deleteTeacher);
 
 //Student Routes
 app.get("/students", getStudents);
 app.post("/students", addStudent);
-app.patch("/students", editStudent);
-app.delete("/students/", deleteStudent );
+app.patch("/students/:id", editStudent);
+app.delete("/students/:id", deleteStudent);
 
 // BOOK ROUTES
 // ISSUE or RETURN ROUTES
@@ -51,6 +51,9 @@ app.post("/books/return/", returnBooks);
 app.post("/books/category", addCategory);
 app.get("/books/categories", getCategories);
 app.get("/books/search/:term", searchBook);
+
+app.get("/issuedbooks", getIssuedBooks);
+
 app.get("/books/:id", getBookByID);
 app.get("/books", getBooks);
 
@@ -60,7 +63,6 @@ app.patch("/books/:id", updateBook);
 app.delete("/books/:id", deleteBook);
 
 // Get all issued books
-app.get("/book/issues", getIssuedBooks);
 
 app.get("/log/:year", getLog);
 
