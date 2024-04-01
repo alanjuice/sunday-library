@@ -23,6 +23,7 @@ const {
   getStudents,
   getTeachers,
   deleteStudent,
+  getStats,
 } = require("../controllers/admin");
 
 const { adminauth } = require("../middleware");
@@ -65,5 +66,6 @@ app.delete("/books/:id", deleteBook);
 // Get all issued books
 
 app.get("/log/:year", getLog);
+app.get("/stats", getStats);
 
 module.exports = app;

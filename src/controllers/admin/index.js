@@ -21,8 +21,10 @@ const editTeacher = require("./editTeacher");
 const getTeachers = require("./getTeachers");
 const getStudents = require("./getStudents");
 const deleteStudent = require("./deleteStudent");
+const getStats = require("./getStats");
 
 module.exports = {
+  getStats,
   addBook,
   addTeacher,
   getBooksByCat,
