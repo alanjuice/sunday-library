@@ -5,12 +5,11 @@ async function getLog(req, res) {
   try {
     const parsedYear = parseInt(year); // Convert year to a number
     const result = await pool.query(
-      "SELECT l.class, ARRAY_AGG(DISTINCT b.name) AS books " +
+      "SELECT l.class, l.book_id, b.name AS book_name " +
         "FROM log l " +
-        "JOIN books b ON l.book_id = b.id " + // Assuming there's a books table with book names
+        "JOIN books b ON l.book_id = b.id " +
         "WHERE l.issue_date BETWEEN $1 AND $2 " +
-        "GROUP BY l.class " +
-        "ORDER BY l.class",
+        "ORDER BY l.class, l.book_id",
       [`${parsedYear}-01-01`, `${parsedYear + 1}-01-01`]
     );
 

@@ -24,7 +24,7 @@ async function issueBooks(req, res) {
           book,
         ]);
         //Insert the issue into logs
-        await pool.query("INSERT INTO LOG VALUES ($1,'2025-05-05',$2)", [
+        await pool.query("INSERT INTO LOG VALUES ($1,'NOW()',$2)", [
           classname,
           book,
         ]);
