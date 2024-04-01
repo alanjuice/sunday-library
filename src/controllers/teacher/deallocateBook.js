@@ -4,7 +4,7 @@ async function deallocateBook(req, res) {
   try {
     const { bookIds } = req.body;
     const teacherId = req.user.id;
-
+    console.log(req.body);
     const deallocatePromises = bookIds.map(async (bookId) => {
       const result = await pool.query(
         "UPDATE issues SET SID = NULL WHERE bid = $1 AND return_date IS NULL and tid=$2 and sid is not null",
