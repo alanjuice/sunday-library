@@ -2,6 +2,7 @@ const pool = require("../../database/pool");
 
 //Issue multiple books to a teacher, requires teacher id and list of books to issue
 async function issueBooks(req, res) {
+  console.log(req.body);
   const { books, teacherId } = req.body;
   try {
     const results = await pool.query(
@@ -23,7 +24,7 @@ async function issueBooks(req, res) {
           book,
         ]);
         //Insert the issue into logs
-        await pool.query("INSERT INTO LOG VALUES ($1,'NOW()',$2)", [
+        await pool.query("INSERT INTO LOG VALUES ($1,'2025-05-05',$2)", [
           classname,
           book,
         ]);

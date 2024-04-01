@@ -22,6 +22,7 @@ const getTeachers = require("./getTeachers");
 const getStudents = require("./getStudents");
 const deleteStudent = require("./deleteStudent");
 const getStats = require("./getStats");
+const getLogYears = require("./getLogYears");
 
 module.exports = {
   getStats,
@@ -48,4 +49,5 @@ module.exports = {
   getTeachers,
   getStudents,
   deleteStudent,
+  getLogYears,
 };
