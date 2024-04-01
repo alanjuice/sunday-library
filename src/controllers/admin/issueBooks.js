@@ -2,8 +2,16 @@ const pool = require("../../database/pool");
 
 //Issue multiple books to a teacher, requires teacher id and list of books to issue
 async function issueBooks(req, res) {
-  const { books, teacherId, classname } = req.body;
+  const { books, teacherId } = req.body;
   try {
+    const results = await pool.query(
+      "select classname from teachers where id=$1",
+      [teacherId]
+    );
+    if (results.rowCount == 0) {
+      res.status(400).json({ status: false, msg: "teacher doesn't exist" });
+    }
+    const classname = results.rows[0].classname;
     await Promise.all(
       books.map(async (book) => {
         //Insert into issue table

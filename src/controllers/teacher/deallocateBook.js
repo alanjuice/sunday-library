@@ -1,21 +1,30 @@
-//return a book from student to teacher, the teacher now has the book?
 const pool = require("../../database/pool");
 
 async function deallocateBook(req, res) {
   try {
-    const { bookId } = req.body;
+    const { bookIds } = req.body;
     const teacherId = req.user.id;
-    const result = await pool.query(
-      "UPDATE issues SET SID = NULL WHERE bid = $1 AND return_date IS NULL and tid=$2 and sid is not null",
-      [bookId, teacherId]
+
+    const deallocatePromises = bookIds.map(async (bookId) => {
+      const result = await pool.query(
+        "UPDATE issues SET SID = NULL WHERE bid = $1 AND return_date IS NULL and tid=$2 and sid is not null",
+        [bookId, teacherId]
+      );
+      return result.rowCount;
+    });
+
+    const results = await Promise.all(deallocatePromises);
+    const totalUpdatedRows = results.reduce(
+      (acc, rowCount) => acc + rowCount,
+      0
     );
-    console.log(result.rows);
-    if (result.rowCount > 0) {
-      res.json({ status: true, msg: "Book deallocated successfully" });
+
+    if (totalUpdatedRows > 0) {
+      res.json({ status: true, msg: "Books deallocated successfully" });
     } else {
       res.json({
         status: false,
-        msg: "Book not found",
+        msg: "No books found to deallocate",
       });
     }
   } catch (error) {
