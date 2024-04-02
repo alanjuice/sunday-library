@@ -59,7 +59,7 @@ app.get("/issuedbooks", getIssuedBooks);
 
 app.get("/books/:id", getBookByID);
 app.get("/books", getBooks);
-app.get("availablebooks", getAvailableBooks);
+app.get("/availablebooks", getAvailableBooks);
 
 app.post("/books/:id", addExistingBook);
 app.post("/books", addBook);
