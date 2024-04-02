@@ -61,7 +61,7 @@ app.get("/books/:id", getBookByID);
 app.get("/books", getBooks);
 app.get("/availablebooks", getAvailableBooks);
 
-app.post("/books/:id", addExistingBook);
+app.post("/existingbook", addExistingBook);
 app.post("/books", addBook);
 app.patch("/books/:id", updateBook);
 app.delete("/books/:id", deleteBook);

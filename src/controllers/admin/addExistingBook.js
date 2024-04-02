@@ -2,7 +2,7 @@ const pool = require("../../database/pool");
 
 async function addExistingBook(req, res) {
   try {
-    const { id } = req.params;
+    const { id } = req.body;
 
     // Check if the book with the given ID exists
     const exists = await pool.query("SELECT * FROM books WHERE id = $1", [id]);
