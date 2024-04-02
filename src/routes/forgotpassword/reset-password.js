@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-function resetpassword(req, res) {
+async function resetpassword(req, res) {
   const { token, id } = req.params;
   console.log(token, id);
   try {

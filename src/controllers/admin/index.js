@@ -23,8 +23,10 @@ const getStudents = require("./getStudents");
 const deleteStudent = require("./deleteStudent");
 const getStats = require("./getStats");
 const getLogYears = require("./getLogYears");
+const getAvailableBooks = require("./getAvailableBooks");
 
 module.exports = {
+  getAvailableBooks,
   getStats,
   addBook,
   addTeacher,

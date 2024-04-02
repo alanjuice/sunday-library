@@ -25,6 +25,7 @@ const {
   deleteStudent,
   getStats,
   getLogYears,
+  getAvailableBooks,
 } = require("../controllers/admin");
 
 const { adminauth } = require("../middleware");
@@ -58,6 +59,7 @@ app.get("/issuedbooks", getIssuedBooks);
 
 app.get("/books/:id", getBookByID);
 app.get("/books", getBooks);
+app.get("availablebooks", getAvailableBooks);
 
 app.post("/books/:id", addExistingBook);
 app.post("/books", addBook);
