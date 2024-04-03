@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 //Login for admin
 async function loginHandler(req, res) {
   const password = req.body.password;
+  console.log(req.body);
 
   try {
     const secret = process.env.SECRET_KEY;

@@ -6,7 +6,7 @@ async function editTeacher(req, res) {
     const { name, classname, email } = req.body;
 
     await pool.query(
-      "UPDATE TEACHERS SET name = $2, class = $3,email = $4 WHERE id = $1",
+      "UPDATE TEACHERS SET name = $2, classname = $3,email = $4 WHERE id = $1",
       [id, name, classname, email]
     );
     console.log("Teacher updated " + id);
