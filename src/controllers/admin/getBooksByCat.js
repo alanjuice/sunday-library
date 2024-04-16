@@ -1,6 +1,7 @@
 const pool = require("../../database/pool");
 
 //Get books of the specified category
+//NOT USED
 async function getBooksByCat(req, res) {
   try {
     const category = req.params.category;

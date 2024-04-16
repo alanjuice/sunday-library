@@ -1,10 +1,22 @@
+const Joi = require("joi");
 const pool = require("../../database/pool");
+
+const categorySchema = Joi.object({
+  id: Joi.string().required().max(5),
+  category_name: Joi.string().required().max(32),
+});
 
 async function addCategory(req, res) {
   try {
+    
+    const { error } = categorySchema.validate(req.body);
+    if (error) {
+      return res.status(400).json({ status: false, msg: error.message });
+    }
+
     const { id, category_name } = req.body;
 
-    // Check if book already exists
+    // Check if category already exists
     const exists = await pool.query("SELECT * FROM BOOK_CAT WHERE id = $1", [
       id,
     ]);

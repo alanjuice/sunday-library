@@ -5,9 +5,9 @@ const bcrypt = require("bcrypt");
 //Teacher model
 //password strentght check? mno size check
 const teacherSchema = Joi.object({
-  id: Joi.string().required(),
+  id: Joi.string().required().max(5),
   name: Joi.string().required().max(64),
-  email: Joi.required(),
+  email: Joi.string().required().max(32),
   classname: Joi.string().required().max(3),
   password: Joi.string().required(),
 });
@@ -21,7 +21,7 @@ async function addTeacher(req, res) {
 
     const { id, name, email, classname, password } = req.body;
 
-    // Check if teacher already exists
+    // if teacher already exists
     const exists = await pool.query("SELECT * FROM teachers WHERE id = $1", [
       id,
     ]);
@@ -32,7 +32,7 @@ async function addTeacher(req, res) {
         .json({ status: false, msg: "Teacher already exists" });
     }
 
-    // Encrypting password
+    // encrpyt password
     const saltRounds = 10;
     const encryptedPassword = await bcrypt.hash(password, saltRounds);
 

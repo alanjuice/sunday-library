@@ -4,6 +4,10 @@ async function addExistingBook(req, res) {
   try {
     const { id } = req.body;
 
+    if (!id) {
+      res.status(400).json({ status: false, msg: "please provide a id" });
+    }
+
     // Check if the book with the given ID exists
     const exists = await pool.query("SELECT * FROM books WHERE id = $1", [id]);
     if (exists.rowCount == 0) {
@@ -20,10 +24,9 @@ async function addExistingBook(req, res) {
     // Convert the count to a letter
     const suffixLetter = String.fromCharCode(96 + existingCount);
 
-    // Generate the new ID
     const newId = id + suffixLetter;
 
-    // Retrieve details of the existing book
+    // details of the existing book
     const oldBookDetails = exists.rows[0];
 
     // Insert the new book with the modified ID

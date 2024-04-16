@@ -1,4 +1,4 @@
-//TODO:more like deactivate teacher?
+
 
 const pool = require("../../database/pool");
 

@@ -3,7 +3,7 @@ const Joi = require("joi");
 
 //Student model
 const studentSchema = Joi.object({
-  id: Joi.string().required(),
+  id: Joi.string().required().max(5),
   name: Joi.string().required().max(64),
   classname: Joi.string().required().max(3),
 });
