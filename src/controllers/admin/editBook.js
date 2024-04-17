@@ -12,7 +12,7 @@ const Joi = require("joi");
 
 async function updateBook(req, res) {
   try {
-    // const { id } = req.params;
+    const { id } = req.params;
 
     // const { error } = bookSchema.validate(req.body);
     // if (error) {
