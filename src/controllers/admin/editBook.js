@@ -2,6 +2,7 @@ const pool = require("../../database/pool");
 const Joi = require("joi");
 
 const bookSchema = Joi.object({
+  id: Joi.string(),
   name: Joi.string().required().max(64),
   author: Joi.string().required().max(64),
   price: Joi.number().required(),
