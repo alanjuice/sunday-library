@@ -1,23 +1,23 @@
 const pool = require("../../database/pool");
 const Joi = require("joi");
 
-// const bookSchema = Joi.object({
-//   id: Joi.string(),
-//   name: Joi.string().required().max(64),
-//   author: Joi.string().required().max(64),
-//   price: Joi.number().required(),
-//   publisher: Joi.string().required().max(64),
-//   category: Joi.string().required().max(24),
-// });
+const bookSchema = Joi.object({
+  id: Joi.string(),
+  name: Joi.string().required().max(64),
+  author: Joi.string().required().max(64),
+  price: Joi.number().required(),
+  publisher: Joi.string().required().max(64),
+  category: Joi.string().required().max(24),
+});
 
 async function updateBook(req, res) {
   try {
     const { id } = req.params;
 
-    // const { error } = bookSchema.validate(req.body);
-    // if (error) {
-    //   return res.status(400).json({ status: false, msg: error.message });
-    // }
+    const { error } = bookSchema.validate(req.body);
+    if (error) {
+      return res.status(400).json({ status: false, msg: error.message });
+    }
 
     const { name, author, price, publisher, category } = req.body;
 
