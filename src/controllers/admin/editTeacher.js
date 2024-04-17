@@ -2,6 +2,7 @@ const pool = require("../../database/pool");
 const Joi = require("joi");
 
 const teacherSchema = Joi.object({
+  id: Joi.string(),
   name: Joi.string().required().max(64),
   email: Joi.string().required().max(32),
   classname: Joi.string().required().max(3),

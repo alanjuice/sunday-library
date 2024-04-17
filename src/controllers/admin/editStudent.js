@@ -2,6 +2,7 @@ const pool = require("../../database/pool");
 const Joi = require("joi");
 
 const studentSchema = Joi.object({
+  id: Joi.string(),
   name: Joi.string().required().max(64),
   classname: Joi.string().required().max(3),
 });
@@ -14,7 +15,7 @@ async function updateStudent(req, res) {
     if (error) {
       return res.status(400).json({ status: false, msg: error.message });
     }
-    
+
     const { name, classname } = req.body;
 
     await pool.query(
