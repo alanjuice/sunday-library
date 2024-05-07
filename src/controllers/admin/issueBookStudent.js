@@ -10,7 +10,6 @@ async function issueBooksStudent(req, res) {
     if (results.rowCount == 0) {
       res.status(400).json({ status: false, msg: "student doesn't exist" });
     }
-    const classname = results.rows[0].classname;
     await Promise.all(
       books.map(async (book) => {
         //Insert into issue table
