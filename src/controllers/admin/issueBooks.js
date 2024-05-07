@@ -5,10 +5,9 @@ async function issueBooks(req, res) {
   console.log(req.body);
   const { books, teacherId } = req.body;
   try {
-    const results = await pool.query(
-      "select classname from teachers where id=$1",
-      [teacherId]
-    );
+    const results = await pool.query("select * from teachers where id=$1", [
+      teacherId,
+    ]);
     if (results.rowCount == 0) {
       res.status(400).json({ status: false, msg: "teacher doesn't exist" });
     }

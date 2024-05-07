@@ -24,6 +24,7 @@ const deleteStudent = require("./deleteStudent");
 const getStats = require("./getStats");
 const getLogYears = require("./getLogYears");
 const getAvailableBooks = require("./getAvailableBooks");
+const issueBooksStudent = require("./issueBookStudent");
 
 module.exports = {
   getAvailableBooks,
@@ -52,4 +53,5 @@ module.exports = {
   getStudents,
   deleteStudent,
   getLogYears,
+  issueBooksStudent,
 };

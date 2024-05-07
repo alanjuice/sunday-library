@@ -26,6 +26,7 @@ const {
   getStats,
   getLogYears,
   getAvailableBooks,
+  issueBooksStudent,
 } = require("../controllers/admin");
 
 const { adminauth } = require("../middleware");
@@ -48,6 +49,8 @@ app.delete("/students/:id", deleteStudent);
 
 // BOOK ROUTES
 // ISSUE or RETURN ROUTES
+app.post("/books/issuetostudent", issueBooksStudent);
+
 app.post("/books/issue/", issueBooks);
 app.post("/books/return/", returnBooks);
 
