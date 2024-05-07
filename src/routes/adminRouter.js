@@ -49,9 +49,9 @@ app.delete("/students/:id", deleteStudent);
 
 // BOOK ROUTES
 // ISSUE or RETURN ROUTES
-app.post("/books/issuetostudent", issueBooksStudent);
+app.post("/books/issue/student", issueBooksStudent);
+app.post("/books/issue/teacher/", issueBooks);
 
-app.post("/books/issue/", issueBooks);
 app.post("/books/return/", returnBooks);
 
 app.post("/books/category", addCategory);
