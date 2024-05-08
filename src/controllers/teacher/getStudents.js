@@ -6,7 +6,7 @@ async function getStudents(req, res) {
     const cls = req.user.classname;
     console.log(cls);
     const result = await pool.query(
-      "select * from students where classname = $1",
+      "select * from students where classname = $1 and status=true",
       [cls]
     );
     console.log(result);
